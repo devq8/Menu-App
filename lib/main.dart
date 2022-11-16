@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:menu_app/models/food.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  final menu = {
+    'Burger': 'assets/images/burger.jpg',
+    'Biryani': 'assets/images/biryani.jpg',
+    'Pasta': 'assets/images/pasta.jpg',
+    'Pizza': 'assets/images/pizza.jpg',
+    'Suchi': 'assets/images/suchi.jpg',
+  };
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,23 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.orangeAccent,
+          title: Text(
+            "Talabat",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: ListView(
+          children: menu.entries
+              .map((e) => FoodCard(name: e.key, url: e.value))
+              .toList(),
+        ),
+      ),
     );
   }
 }
